@@ -9,11 +9,12 @@ class Boundary {
   // But we also have to make a body for box2d to know about it
   Body b;
 
-  Boundary(float x_,float y_, float w_, float h_) {
+  Boundary(float x_,float y_, float w_, float h_, String bodyType) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
+    type = bodyType
 
     // Define the polygon
     PolygonShape sd = new PolygonShape();
@@ -26,7 +27,15 @@ class Boundary {
 
     // Create the body
     BodyDef bd = new BodyDef();
-    bd.type = BodyType.STATIC;
+    if (type == "STATIC") {
+      bd.type = BodyType.STATIC;
+    } 
+    else if (type == "KINEMATIC") {
+      bd.type = BodyType.STATIC;
+    }
+    else if (type == "DYNAMIC") {
+      bd.type = BodyType.DYNAMIC;
+    }
     bd.position.set(box2d.coordPixelsToWorld(x,y));
     b = box2d.createBody(bd);
     
