@@ -1,7 +1,7 @@
 
 ArrayList<Interactable> ints = new ArrayList<Interactable>();
 Player player = new Player(new PVector(300, 300));
-String screen = "main";
+int screen = 1;
 String[] fontList = PFont.list();
 PFont font;
 
@@ -10,7 +10,7 @@ void keyPressed() {
     player.jump();
   }
   if (key == 'p') {
-    screen = "options";
+    screen = -screen;
   }
 }
 
@@ -27,13 +27,13 @@ void setup() {
 
 void draw() {
   background(#FFFFFF);
-  if (screen == "main") {
+  if (screen == 1) {
     player.drawPlayer();
     for (int i = 0; i < ints.size(); i++) {
       ints.get(i).doGravity();
     }
   }
-  else if (screen == "options") {
+  else if (screen == -1) {
     textAlign(CENTER);
     text("Test", width/2, 100);
   }
